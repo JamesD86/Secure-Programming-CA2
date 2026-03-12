@@ -4,6 +4,13 @@
 /*
  * Buffer Overflow example based on past lab submission.
  * 
+ * The goal here is to write too many characters into a char array
+ * and cause it to corrupt an int variable. Earlier versions of
+ * this program simply put the char array and variable in the main
+ * method, but it was actually rare to produce the intended overflow
+ * and corruption. Therefore, this one utiizes a struct called Helper
+ * as the fields should be stored together in order.
+ * 
  * scanf() is used to read in a string and save it to a
  * char array "input" of size 100.
  * 
@@ -21,22 +28,26 @@
  * 
  */
  
- 
+struct Helper {
+	 char copied[8];
+	 int privilegeLevel;
+};
 
 int main(void) {
     char input[100];
-    char copied[8];
-    int privilegeLevel = 1;
+    struct Helper helper;
+    
+    helper.privilegeLevel = 1;
 
     printf("Enter a string to copy into an 8-byte buffer:\n");
     scanf("%99s", input);
 
-    strcpy(copied, input);  // vulnerable as there is no bounds check!
+    strcpy(helper.copied, input);  // vulnerable as there is no bounds check!
 
-    printf("Copied string: %s\n", copied);
-    printf("privilegeLevel = %d\n", privilegeLevel);
+    printf("Copied string: %s\n", helper.copied);
+    printf("privilegeLevel = %d\n", helper.privilegeLevel);
 
-    if (privilegeLevel != 1) {
+    if (helper.privilegeLevel != 1) {
         printf("WARNING: Corruption of privilege level has occurred.\n");
     }
 
