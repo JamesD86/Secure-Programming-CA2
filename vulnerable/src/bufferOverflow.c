@@ -33,23 +33,39 @@ struct Helper {
 	 int privilegeLevel;
 };
 
+/*
+ * Using this helper struct greatly improved the chances of
+ * an overflow successfully corrupting the privilegeLevel int
+ * varaible value.
+ * 
+ */
+
 int main(void) {
-    char input[100];
-    struct Helper helper;
+    char input[100]; // local large buffer for user input
+    struct Helper helper; //creates new helper struct
     
     helper.privilegeLevel = 1;
+    
+    printf("The current value of privilege level is: %d\n\n", helper.privilegeLevel);
+    
+    printf("Vulnerable array memory address: %p\n", (void *)helper.copied);
+    printf("INT variable privilegeLevel memory address: %p\n",  (void *)&helper.privilegeLevel);
+    printf("Distance between fields: %ld bytes\n\n", (char *)&helper.privilegeLevel - (char *)helper.copied);
+    
 
-    printf("Enter a string to copy into an 8-byte buffer:\n");
+    printf("Enter a string to copy into an 8-byte buffer (>7 will overflow):\n");
     scanf("%99s", input);
 
     strcpy(helper.copied, input);  // vulnerable as there is no bounds check!
 
     printf("Copied string: %s\n", helper.copied);
-    printf("privilegeLevel = %d\n", helper.privilegeLevel);
+    printf("privilegeLevel value is = %d\n", helper.privilegeLevel);
 
     if (helper.privilegeLevel != 1) {
-        printf("WARNING: Corruption of privilege level has occurred.\n");
-    }
+        printf("SUCCESS: Corruption of privilege level has occurred.\n");
+    } else {
+		printf("FAIL: No corruption of privilege level detected.\n");
+	}
 
     return 0;
 }
