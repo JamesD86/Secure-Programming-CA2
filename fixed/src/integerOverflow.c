@@ -24,6 +24,14 @@ int main(void) {
 	
 	int maxDeposit = INT_MAX - balance;
 	
+	printf("This fixed version attempts to prevent an integer overflow.\n");
+	
+	printf("While the balance is still approaching the INT_MAX value,\n");
+	
+	printf("the user input is tested to ensure it is less then the maxDeposit.\n");
+	
+	printf("The deposit also must be positive!.\n\n");
+	
 	printf("Your current balance is: %d\n", balance);
 	printf("Your maximum safe deposit is: %d\n", maxDeposit);
 	
@@ -31,11 +39,23 @@ int main(void) {
 	scanf("%d", &deposit);
 	
 	if (deposit > maxDeposit || deposit < 0) {
-		printf("Cannot process this deposit. Please try again!\n");
+		printf("FAIL: Cannot process this deposit. Please try again!\n");
 	} else {
 		balance = balance + deposit;
-		printf("Your new balance is: %d\n", balance);
+		printf("SUCCESS: Your new balance is: %d\n", balance);
 	}
+	
+	/*
+	 * If the deposit goes beyond the maxDeposit, or if it is
+	 * negative, it will be rejected by this program. Of course,
+	 * it would be possible to simply change data type and avoid
+	 * the int size problem, but this exercise is about preventing
+	 * the overflow with a fix rather than changing data type
+	 * entirely.
+	 * 
+	 */
+	 
+	
 	return 0;
 
 }
