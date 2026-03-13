@@ -30,6 +30,12 @@ int main(void) {
     struct Helper helper;
     
     helper.privilegeLevel = 1;
+    
+    printf("The current value of privilege level is: %d\n\n", helper.privilegeLevel);
+    
+    printf("Vulnerable array memory address: %p\n", (void *)helper.copied);
+    printf("INT variable privilegeLevel memory address: %p\n",  (void *)&helper.privilegeLevel);
+    printf("Distance between fields: %ld bytes\n\n", (char *)&helper.privilegeLevel - (char *)helper.copied);
 
     printf("Enter a string to copy into an 8-byte buffer:\n");
     scanf("%99s", input);
@@ -39,12 +45,12 @@ int main(void) {
 
 
     printf("Copied string: %s\n", helper.copied);
-    printf("privilegeLevel = %d\n", helper.privilegeLevel);
+    printf("privilegeLevel value is = %d\n", helper.privilegeLevel);
 
     if (helper.privilegeLevel != 1) {
-        printf("WARNING: Corruption of privilege level has occurred.\n");
+        printf("FAIL: Corruption of privilegeLevel has occurred! \n");
     } else {
-		printf("No corruption detected!\n");
+		printf("SUCCESS: No corruption detected!\n");
 	}
 
     return 0;
