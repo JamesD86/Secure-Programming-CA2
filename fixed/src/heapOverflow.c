@@ -12,7 +12,7 @@
  * In the vulnerable version, oversized input can overflow the copied array
  * and corrupt the privilegeLevel variable.
  * 
- * This "fixed" version prevents the heap overrun from the vulnerable 
+ * This "fixed" version prevents the heap overflow from the vulnerable 
  * version with two main changes. Firstly, while user input is not
  * restricted to fewer characters than the vulnerable version, the
  * length is checked with strlen(). If the length is greater than 7, 
@@ -65,7 +65,7 @@ int main(void) {
     
     printf("Current value of privilege level is %d\n\n", helper->privilegeLevel);
     
-    printf("This program demonstrates avoiding a heap overflow with C\n");
+    printf("This program fixes a demonstrated heap overflow with C\n");
     printf("It contains an 8-byte character array that your input is copied into with strncpy()\n");
     printf("It also contains a privilege level variable, initially set to '1'\n");
     printf("The 4-byte privilegeLevel int variable should be stored immediately after the char array in the struct layout\n");
@@ -98,6 +98,13 @@ int main(void) {
 		free(helper); //releases memory allocated by malloc() 
 		return 1;
 	}
+	
+	/*
+	 * If the length of the string is greater than 7, the program
+	 * will then free the memory allocated for the helper struct, 
+	 * and will proceed to terminate with a non-zero return value.
+	 * 
+	 */ 
     
 
     strncpy(helper->copied, input, sizeof(helper->copied) -1);
