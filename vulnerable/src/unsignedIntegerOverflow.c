@@ -54,7 +54,7 @@ int main(void) {
 	printf("The correct total should be: %ld\n\n", longtotal);
 	
 	if ((long)balance != longtotal) {
-		printf("SUCCESS: Integer overrun has resulted in corrupted balance!\n");
+		printf("SUCCESS: Integer overflow has resulted in corrupted balance!\n");
 	} else {
 		printf("FAIL: No corruption of balance detected!\n");
 	}
