@@ -1,3 +1,3 @@
 #!/bin/bash
-gcc -fno-stack-protector heapOverflow.c -o heapOverflow.o
+gcc heapOverflow.c -o heapOverflow.o
 ./heapOverflow.o
