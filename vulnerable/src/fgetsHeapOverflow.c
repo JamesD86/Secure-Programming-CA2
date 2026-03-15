@@ -42,7 +42,7 @@ int main(void) {
      * 
      * sieof(struct Helper) determines the number of bytes needed,
      * malloc reserves that number of bytes, and helper stores the 
-     * return address (as helper is a pointer to a struct)
+     * address returned by malloc (as helper is a pointer to a struct)
      * 
      */
     
