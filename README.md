@@ -10,8 +10,8 @@ This repo contains three examples of overflow vulnerabilities written in C.
 These are:
 
 - Stack Buffer Overflow
-- Integer Overflow
-- Heap Overflow
+- Integer Overflow (Signed and Unsigned)
+- Heap Overflow (strcpy() and fgets() examples)
 
 For each vulnerability there is a vulnerable version, fixed version, and
 shell script.
@@ -33,6 +33,9 @@ CA2<br>
 |	|--	heapOverflow.c<br>
 |	|--	heapOverflow.o<br>
 |	|--	heapOverflow.sh<br>
+|	|--	fgetsHeapOverflow.c<br>
+|	|--	fgetsHeapOverflow.o<br>
+|	|--	fgetsHeapOverflow.sh<br>
 |<br>
 |__	fixed/src<br>
 	|--	bufferOverflow.c<br>
@@ -47,6 +50,9 @@ CA2<br>
 	|--	heapOverflow.c<br>
 	|--	heapOverflow.o<br>
 	|--	heapOverflow.sh<br>
+	|--	fgetsHeapOverflow.c<br>
+	|--	fgetsHeapOverflow.o<br>
+	|--	fgetsHeapOverflow.sh<br>
 	
 ## Requirements
 
